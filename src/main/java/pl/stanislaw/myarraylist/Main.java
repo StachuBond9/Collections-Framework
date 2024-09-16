@@ -1,4 +1,4 @@
-package pl.stanislaw;
+package pl.stanislaw.myarraylist;
 
 public class Main {
     public static void main(String[] args) {

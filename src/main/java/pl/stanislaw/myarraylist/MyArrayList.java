@@ -1,24 +1,24 @@
-package pl.stanislaw;
+package pl.stanislaw.myarraylist;
 
 import java.util.Arrays;
 
-public class MyArrayList implements MyList {
+public class MyArrayList<T> implements MyList<T> {
     private int capacity;
-    private Integer[] array;
+    private Object[] array;
     private int size = 0;
 
     public MyArrayList() {
         capacity = 10;
-        array = new Integer[capacity];
+        array = new Object[capacity];
     }
 
     public MyArrayList(int capacity) {
         this.capacity = capacity;
-        array = new Integer[capacity];
+        array = new Object[capacity];
     }
 
     @Override
-    public void add(Integer element) {
+    public void add(T element) {
         if (isArrayFull()) {
             array = Arrays.copyOf(array, capacity*2);
             capacity *=2;
@@ -28,13 +28,13 @@ public class MyArrayList implements MyList {
     }
 
     @Override
-    public void add(int index, Integer element) {
+    public void add(int index, T element) {
 
     }
 
     @Override
-    public Integer get(int index) {
-        return array[index];
+    public T get(int index) {
+        return (T) array[index];
     }
 
     @Override
@@ -47,17 +47,17 @@ public class MyArrayList implements MyList {
     }
 
     @Override
-    public void remove(Integer element) {
+    public void remove(T element) {
 
     }
 
     @Override
-    public void set(int index, Integer element) {
+    public void set(int index, T element) {
 
     }
 
     @Override
-    public int indexOf(Integer element) {
+    public int indexOf(T element) {
         return 0;
     }
 
@@ -67,12 +67,12 @@ public class MyArrayList implements MyList {
     }
 
     @Override
-    public boolean contains(Integer element) {
+    public boolean contains(T element) {
         if (element == null) {
             return false;
         }
-        for (Integer i : array) {
-            if (element.equals(i)) {
+        for (Object i : array) {
+            if (element.equals((T) i)) {
                 return true;
             }
         }

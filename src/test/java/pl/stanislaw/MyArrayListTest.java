@@ -2,15 +2,15 @@ package pl.stanislaw;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import pl.stanislaw.myarraylist.MyArrayList;
 
 class MyArrayListTest {
-    MyArrayList list = new MyArrayList();
+
 
     @Test
     void addElementTest() {
         //given
+        MyArrayList<Integer> list = new MyArrayList();
 
         Integer element = 1;
 
@@ -25,6 +25,7 @@ class MyArrayListTest {
     @Test
     void addMultipleElementsTest() {
         //given
+        MyArrayList<Integer> list = new MyArrayList();
         Integer element = 1;
 
         //when
@@ -43,57 +44,60 @@ class MyArrayListTest {
 
     @Test
     void addMultipleElementsShouldIncreaseCapacityTest() {
-        MyArrayList myArrayList = new MyArrayList(3);
+        MyArrayList<Integer> list = new MyArrayList(3);
 
-            myArrayList.add(1);
-            myArrayList.add(2);
-            myArrayList.add(3);
-            myArrayList.add(4);
-            myArrayList.add(1);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(1);
 
 
-        Assertions.assertEquals(5, myArrayList.size() );
+        Assertions.assertEquals(5, list.size());
     }
 
     @Test
     void getElementByIndexTest() {
         // given
-        MyArrayList myArrayList = new MyArrayList(3);
+        MyArrayList<Integer> list = new MyArrayList(3);
         int element = 15;
-        myArrayList.add(1);
-        myArrayList.add(15);
-        myArrayList.add(2);
-        myArrayList.add(3);
-        myArrayList.add(4);
-        myArrayList.add(1);
+        list.add(1);
+        list.add(15);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(1);
 
         //when
-        int real = myArrayList.get(1);
+        int real = list.get(1);
 
-        Assertions.assertEquals(element, real );
+        Assertions.assertEquals(element, real);
     }
 
     @Test
     void removeElementByIndexTest() {
 
         //given
-        MyArrayList myArrayList = new MyArrayList(3);
-        myArrayList.add(1);
-        myArrayList.add(2);
-        myArrayList.add(3);
-        myArrayList.add(4);
-        myArrayList.add(1);
-
+        MyArrayList<Integer> list = new MyArrayList(3);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(1);
+        Integer[] expectedObjects = new Integer[].;
         //when
-        myArrayList.remove(3);
+        list.remove(3);
+        int size = list.size();
+
+        Integer[] objects = new Integer[size];
+        for (int i = 0; i < size; i++) {
+            objects[i] = list.get(i);
+        }
+
 
         //then
-
-        Assertions.assertEquals(4, myArrayList.size());
-        Assertions.assertEquals(1, myArrayList.get(0));
-        Assertions.assertEquals(2, myArrayList.get(1));
-        Assertions.assertEquals(3, myArrayList.get(2));
-        Assertions.assertEquals(1, myArrayList.get(3));
+        Assertions.assertEquals(4, size);
+        Assertions.assertEquals(objects, );
     }
 
 }
