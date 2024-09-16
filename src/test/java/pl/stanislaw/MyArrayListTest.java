@@ -4,9 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pl.stanislaw.myarraylist.MyArrayList;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 class MyArrayListTest {
 
 
@@ -87,25 +84,20 @@ class MyArrayListTest {
         list.add(3);
         list.add(4);
         list.add(1);
-        ArrayList<Integer> expectedElements = new ArrayList<>();
-        expectedElements.add(1);
-        expectedElements.add(2);
-        expectedElements.add(3);
-        expectedElements.add(4);
-
+        Integer[] expectedObjects = new Integer[].;
         //when
-        list.remove(4);
+        list.remove(3);
         int size = list.size();
 
-        ArrayList<Integer> objects = new ArrayList<>();
+        Integer[] objects = new Integer[size];
         for (int i = 0; i < size; i++) {
-            objects.add(list.get(i));
+            objects[i] = list.get(i);
         }
 
 
         //then
         Assertions.assertEquals(4, size);
-        Assertions.assertEquals(expectedElements,objects);
+        Assertions.assertEquals(objects, );
     }
 
 }

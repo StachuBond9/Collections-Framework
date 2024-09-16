@@ -4,6 +4,8 @@ import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {
+
+
         Optional<String> opString1 = Optional.empty();
         System.out.println(opString1);
         System.out.println(opString1.isPresent());
@@ -22,8 +24,7 @@ public class Main {
         System.out.println(opString4.isPresent());
 
 
-
-        MyOptional<String> opString5 = MyOptional.ofNullable("12334kl");
+        MyOptional<String> opString5 = MyOptional.of(null);
         String value = opString5.get();
         System.out.println(value);
 
@@ -31,5 +32,7 @@ public class Main {
         MyOptional<String> opString6 = MyOptional.ofNullable("12kl");
         String value1 = opString6.orElse("nullowe");
         System.out.println(value1);
+
+
     }
 }

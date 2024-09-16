@@ -1,10 +1,12 @@
 package pl.stanislaw.optional;
 
+import java.util.function.Supplier;
+
 public class MyOptional<T> {
 
     private T value;
 
-    private MyOptional(T value) {
+    MyOptional(T value) {
         this.value = value;
     }
 
@@ -12,7 +14,7 @@ public class MyOptional<T> {
         return new MyOptional<>(null);
     }
 
-    public static<T> MyOptional<T> ofNullable(T value){
+    public static <T> MyOptional<T> ofNullable(T value) {
         return new MyOptional<>(value);
     }
 
@@ -20,12 +22,38 @@ public class MyOptional<T> {
         return value != null;
     }
 
-    public T get(){
+    public T get() {
         return value;
     }
-    public T orElse(T a){
-        if(value == null){
+
+    public T orElse(T a) {
+        if (value == null) {
             return a;
+        }
+        return value;
+    }
+
+    public boolean isEmpty() {
+        return value == null;
+    }
+
+    public static <T> MyOptional<T> of(T value){
+        if (value == null) {
+            throw new NullPointerException("value cannot be null");
+        }
+        return new MyOptional<>(value);
+    }
+
+    public T orElseGet(Supplier<? extends T> other){
+        if(value == null){
+            return other.get() ;
+        }
+        return value;
+    }
+
+    public T orElseThrow(Supplier<? extends Exception> exceptionSupplier) throws Throwable {
+        if(value == null){
+            throw (Throwable) exceptionSupplier.get();
         }
         return value;
     }
