@@ -20,8 +20,8 @@ public class MyArrayList<T> implements MyList<T> {
     @Override
     public void add(T element) {
         if (isArrayFull()) {
-            array = Arrays.copyOf(array, capacity*2);
-            capacity *=2;
+            array = Arrays.copyOf(array, capacity * 2);
+            capacity *= 2;
         }
         array[size++] = element;
 
@@ -29,7 +29,14 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public void add(int index, T element) {
-
+        if (index > size) {
+            return;
+        }
+        array[index] = 0;
+        for (int i = size; i > index; i--) {
+            array[i] = array[i - 1];
+        }
+        size++;
     }
 
     @Override
@@ -39,26 +46,38 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public void remove(int index) {
+        if (index >= size) {
+            return;
+        }
         array[index] = 0;
-        for(int i = index; i < size; i++){
-            array[i] = array[i+1];
+        for (int i = index; i < size; i++) {
+            array[i] = array[i + 1];
         }
         size--;
     }
 
     @Override
     public void remove(T element) {
-
+        for(int i = 0; i < size; i++){
+            if(array[i].equals(element)){
+                remove(i);
+            }
+        }
     }
 
     @Override
     public void set(int index, T element) {
-
+        array[index] = element;
     }
 
     @Override
     public int indexOf(T element) {
-        return 0;
+         for(int i =0; i < size; i++){
+             if(array[i].equals(element)){
+                 return i;
+             }
+         }
+         return -1;
     }
 
     @Override
