@@ -4,9 +4,9 @@ import java.util.function.Supplier;
 
 public class MyOptional<T> {
 
-    private T value;
+    private final T value;
 
-    MyOptional(T value) {
+    private MyOptional(T value) {
         this.value = value;
     }
 
@@ -37,23 +37,23 @@ public class MyOptional<T> {
         return value == null;
     }
 
-    public static <T> MyOptional<T> of(T value){
+    public static <T> MyOptional<T> of(T value) {
         if (value == null) {
             throw new NullPointerException("value cannot be null");
         }
         return new MyOptional<>(value);
     }
 
-    public T orElseGet(Supplier<? extends T> other){
-        if(value == null){
-            return other.get() ;
+    public T orElseGet(Supplier<? extends T> other) {
+        if (value == null) {
+            return other.get();
         }
         return value;
     }
 
-    public T orElseThrow(Supplier<? extends Exception> exceptionSupplier) throws Throwable {
-        if(value == null){
-            throw (Throwable) exceptionSupplier.get();
+    public T orElseThrow(Supplier<? extends Throwable> exceptionSupplier) throws Throwable {
+        if (value == null) {
+            throw exceptionSupplier.get();
         }
         return value;
     }
