@@ -1,5 +1,7 @@
 package pl.stanislaw.myarraylist;
 
+import pl.stanislaw.MyList;
+
 import java.util.Arrays;
 
 public class MyArrayList<T> implements MyList<T> {

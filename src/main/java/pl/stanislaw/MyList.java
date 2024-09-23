@@ -1,4 +1,4 @@
-package pl.stanislaw.myarraylist;
+package pl.stanislaw;
 
 public interface MyList<T> {
     void add(T element);
