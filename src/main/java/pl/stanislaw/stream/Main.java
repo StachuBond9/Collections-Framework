@@ -18,12 +18,12 @@ public class Main {
         //skip();
         // sorted();
         //task11();
-        //findFirst();
+        findFirst();
         //task13();
         //task14();
         //task15();
         //task16();
-        task17();
+        //task17();
     }
 
     static void filter() {

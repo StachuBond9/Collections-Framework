@@ -81,11 +81,11 @@ public class MyStream<T> {
 
     public MyStream<T> sorted(MyComparator<T> comparator) {
         MyList<T> list = elements;
-        for (int i = 0; i < list.size();i++){
+        for (int i = 0; i < list.size(); i++) {
             for (int j = 1; j < list.size() - i; j++) {//pętla wewnętrzna
                 if (comparator.compare(list.get(j - 1), list.get(j)) > 0) {
                     T element = list.get(j - 1);
-                    list.set(j-1, list.get(j));
+                    list.set(j - 1, list.get(j));
                     list.set(j, element);
                 }
             }
@@ -93,10 +93,9 @@ public class MyStream<T> {
         return new MyStream<>(list);
     }
 
-    public MyOptional<T> findFirst(){
-       return new MyOptional<T>(elements.get(0));
+    public MyOptional<T> findFirst() {
+        return MyOptional.of(toList().get(0));
     }
-
 
 }
 
