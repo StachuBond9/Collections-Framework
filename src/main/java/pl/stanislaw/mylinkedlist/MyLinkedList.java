@@ -58,9 +58,10 @@ public class MyLinkedList<T> implements MyList<T> {
                 current = current.next;
                 if (i == index-1) {
                     addNode.next = current;
+                    current.previous.next = addNode;
                     addNode.previous = current.previous;
                     current.previous = addNode;
-                    return;
+
                 }
             }
         }
