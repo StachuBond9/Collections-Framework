@@ -4,9 +4,16 @@ import pl.stanislaw.MyList;
 
 
 public class MyLinkedList<T> implements MyList<T> {
-    Node<T> head;
-    Node<T> tail;
+    private Node<T> head;
+    private Node<T> tail;
     private int size = 0;
+
+    private static class Node<T> {
+        Node<T> previous;
+        Node<T> next;
+        T element;
+
+    }
 
     @Override
     public void add(T element) {
@@ -61,7 +68,6 @@ public class MyLinkedList<T> implements MyList<T> {
                     current.previous.next = addNode;
                     addNode.previous = current.previous;
                     current.previous = addNode;
-
                 }
             }
         }
@@ -179,9 +185,3 @@ public class MyLinkedList<T> implements MyList<T> {
     }
 }
 
-class Node<T> {
-    Node<T> previous;
-    Node<T> next;
-    T element;
-
-}

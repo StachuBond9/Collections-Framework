@@ -3,9 +3,6 @@ package pl.stanislaw.mylinkedlist;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pl.stanislaw.MyList;
-import pl.stanislaw.myarraylist.MyArrayList;
-
-import java.util.ArrayList;
 
 class MyLinkedListTest {
 
