@@ -3,11 +3,15 @@ package pl.stanislaw.myarraylist;
 import pl.stanislaw.MyList;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
-public class MyArrayList<T> implements MyList<T> {
+public class MyArrayList<T> implements MyList<T> , Iterable<T> {
     private int capacity;
     private Object[] array;
     private int size = 0;
+
 
     public MyArrayList() {
         capacity = 10;
@@ -104,4 +108,24 @@ public class MyArrayList<T> implements MyList<T> {
         return size == array.length;
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new MyIterator();
+    }
+
+
+    private class MyIterator implements Iterator<T>{
+
+        private int index;
+        @Override
+        public boolean hasNext() {
+          return index < size();
+        }
+
+        @Override
+        public T next() {
+            return get(index++);
+        }
+
+    }
 }
