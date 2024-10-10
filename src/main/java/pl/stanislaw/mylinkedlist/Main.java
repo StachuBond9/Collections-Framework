@@ -4,8 +4,8 @@ public class Main {
     public static void main(String[] args) {
         MyLinkedList<String> list = linkedListWIthElements();;
         list.add(2, "Perez");
-        for(int i = 0; i < list.size(); i++){
-            System.out.println(list.get(i));
+        for(String node : list){
+            System.out.println(node);
         }
     }
     private static MyLinkedList<String> linkedListWIthElements() {

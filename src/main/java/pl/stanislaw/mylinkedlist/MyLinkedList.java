@@ -1,9 +1,12 @@
 package pl.stanislaw.mylinkedlist;
 
 import pl.stanislaw.MyList;
+import pl.stanislaw.myarraylist.MyArrayList;
+
+import java.util.Iterator;
 
 
-public class MyLinkedList<T> implements MyList<T> {
+public class MyLinkedList<T> implements MyList<T> , Iterable<T>{
     private Node<T> head;
     private Node<T> tail;
     private int size = 0;
@@ -182,6 +185,30 @@ public class MyLinkedList<T> implements MyList<T> {
             current = current.next;
         }
         return false;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new MyLinkedList.MyIterator();
+    }
+
+    private class MyIterator implements Iterator<T>{
+
+        private Node<T> current = head;
+        private int index = 0;
+
+        @Override
+        public boolean hasNext() {
+            return index< size;
+        }
+
+        @Override
+        public T next() {
+            T  element = current.element;
+            current = current.next;
+            index++;
+            return element;
+        }
     }
 }
 
