@@ -11,7 +11,8 @@ public class MyLinkedList<T> implements MyList<T> , Iterable<T>{
     private Node<T> tail;
     private int size = 0;
 
-    private static class Node<T> {
+    private static
+    class Node<T> {
         Node<T> previous;
         Node<T> next;
         T element;

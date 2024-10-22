@@ -3,6 +3,9 @@ package pl.stanislaw.mylinkedlist;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pl.stanislaw.MyList;
+import pl.stanislaw.myarraylist.MyArrayList;
+
+import java.util.Iterator;
 
 class MyLinkedListTest {
 
@@ -86,6 +89,27 @@ class MyLinkedListTest {
         list.remove("MAX");
         //when then
         Assertions.assertFalse(list.contains("MAX"));
+    }
+    @Test
+    void iteratorWork(){
+        //given
+        MyLinkedList<String> list = linkedListWIthElements();
+        Iterator<String> iterator = list.iterator();
+
+        //when then
+        Assertions.assertTrue(iterator.hasNext());
+        Assertions.assertEquals("MAX", iterator.next());
+        Assertions.assertTrue(iterator.hasNext());
+        Assertions.assertEquals("Norris", iterator.next());
+        Assertions.assertTrue(iterator.hasNext());
+        Assertions.assertEquals("Leclerc", iterator.next());
+        Assertions.assertTrue(iterator.hasNext());
+        Assertions.assertEquals("Piastrii", iterator.next());
+        Assertions.assertTrue(iterator.hasNext());
+        Assertions.assertEquals("Lewis", iterator.next());
+        Assertions.assertFalse(iterator.hasNext());
+
+
     }
 
     private MyLinkedList<String> linkedListWIthElements() {
