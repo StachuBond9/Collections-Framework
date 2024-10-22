@@ -7,8 +7,8 @@ import pl.stanislaw.myarraylist.MyArrayList;
 
 public class MyHashMap<K, V> implements MyMap<K, V> {
     private int capacity = 5;
-    Node<K, V>[] table = new Node[capacity];
-    int size = 0;
+    private Node<K, V>[] table = new Node[capacity];
+    private int size = 0;
 
     @Override
     public V put(K key, V value) {
@@ -59,7 +59,6 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
                 node = node.next;
             }
         }
-
         return null;
     }
 
@@ -110,6 +109,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         for (int i = 0; i < capacity; i++) {
             table[i] = null;
         }
+        size = 0;
     }
 
     public MyList<K> keySet(){

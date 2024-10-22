@@ -48,14 +48,14 @@ class MyHashMapTest {
     void shouldRemoveElement() {
         //given
         MyHashMap<String, String> myHashMap = multipleElementsMap();
-        String key = "ala";
-        String value = "kot";
+        String key = "56767";
+
         //when
-        myHashMap.remove("56767");
+        myHashMap.remove(key);
 
         //then
         Assertions.assertEquals(3, myHashMap.size());
-        Assertions.assertFalse(myHashMap.containsKey("56767"));
+        Assertions.assertFalse(myHashMap.containsKey(key));
         Assertions.assertTrue(myHashMap.containsKey("112225"));
         Assertions.assertTrue(myHashMap.containsKey("990903"));
         Assertions.assertTrue(myHashMap.containsKey("99566733"));
@@ -65,10 +65,9 @@ class MyHashMapTest {
     void shouldNotRemoveElement() {
         //given
         MyHashMap<String, String> myHashMap = multipleElementsMap();
-        String key = "ala";
-        String value = "kot";
+        String nonExistingKey = "567337";
         //when
-        myHashMap.remove("567337");
+        myHashMap.remove(nonExistingKey);
 
         //then
         Assertions.assertEquals(4, myHashMap.size());
@@ -106,6 +105,7 @@ class MyHashMapTest {
 
         // then
         Assertions.assertTrue(myHashMap.isEmpty());
+        Assertions.assertEquals(0, myHashMap.size());
     }
 
 
