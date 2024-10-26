@@ -2,6 +2,7 @@ package pl.stanislaw.mylinkedlist;
 
 import pl.stanislaw.MyList;
 import pl.stanislaw.myarraylist.MyArrayList;
+import pl.stanislaw.stream.MyStream;
 
 import java.util.Iterator;
 
@@ -186,6 +187,11 @@ public class MyLinkedList<T> implements MyList<T> , Iterable<T>{
             current = current.next;
         }
         return false;
+    }
+
+    @Override
+    public MyStream<T> stream() {
+        return new MyStream<>(this);
     }
 
     @Override

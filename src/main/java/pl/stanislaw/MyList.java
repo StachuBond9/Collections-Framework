@@ -1,6 +1,8 @@
 package pl.stanislaw;
 
-public interface MyList<T> {
+import pl.stanislaw.stream.MyStream;
+
+public interface MyList<T> extends Iterable<T>{
     void add(T element);
 
     void add(int index, T element);
@@ -18,4 +20,7 @@ public interface MyList<T> {
     int size();
 
     boolean contains(T element);
+
+    MyStream<T> stream();
+
 }

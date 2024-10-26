@@ -1,6 +1,7 @@
 package pl.stanislaw.myarraylist;
 
 import pl.stanislaw.MyList;
+import pl.stanislaw.stream.MyStream;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -104,6 +105,11 @@ public class MyArrayList<T> implements MyList<T> , Iterable<T> {
         return false;
     }
 
+    @Override
+    public MyStream<T> stream() {
+        return new MyStream<>(this);
+    }
+
     private boolean isArrayFull() {
         return size == array.length;
     }
@@ -127,5 +133,10 @@ public class MyArrayList<T> implements MyList<T> , Iterable<T> {
             return get(index++);
         }
 
+    }
+
+    @Override
+    public String toString() {
+        return "array= " + Arrays.toString(array);
     }
 }

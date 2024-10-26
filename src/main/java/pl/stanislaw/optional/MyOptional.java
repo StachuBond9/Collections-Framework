@@ -6,7 +6,7 @@ public class MyOptional<T> {
 
     private final T value;
 
-    private MyOptional(T value) {
+    public MyOptional(T value) {
         this.value = value;
     }
 
