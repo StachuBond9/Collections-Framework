@@ -94,8 +94,12 @@ public class MyStream<T> {
     }
 
     public MyOptional<T> findFirst() {
-        return MyOptional.of(toList().get(0));
+        if (elements.size() == 0) {
+            return MyOptional.empty();
+        }
+
+        return MyOptional.ofNullable(elements.get(0));
+
     }
 
 }
-
