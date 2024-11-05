@@ -58,4 +58,10 @@ public class MyOptional<T> {
         return value;
     }
 
+    @Override
+    public String toString() {
+        return "MyOptional{" +
+                "value=" + value +
+                '}';
+    }
 }
