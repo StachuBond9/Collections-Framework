@@ -6,7 +6,7 @@ import pl.stanislaw.myarraylist.MyArrayList;
 public class Main {
     public static void main(String[] args) {
         //filter();
-        //mapper();
+        mapper();
         //forEach();
         //task4();
         //count();
@@ -38,7 +38,8 @@ public class Main {
         //task2_14_2();
         //task2_14_3();
         //task2_14_4();
-        task2_14_5();
+        //task2_14_5();
+
     }
 
     static void filter() {
@@ -60,6 +61,7 @@ public class Main {
         names.add("Bartek");
         names.add("Cecylia");
         final var namesMyList = names.stream()
+                .parallel()
                 .map(String::toUpperCase)
                 .toList();
         System.out.println(namesMyList);
@@ -70,7 +72,7 @@ public class Main {
         names.add("Anna");
         names.add("Bartek");
         names.add("Cecylia");
-        names.stream().forEach(System.out::println);
+        names.stream().parallel().forEach(System.out::println);
     }
 
     static void task4() {
