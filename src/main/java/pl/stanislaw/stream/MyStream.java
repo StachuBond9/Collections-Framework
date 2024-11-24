@@ -5,12 +5,16 @@ import pl.stanislaw.optional.MyOptional;
 import pl.stanislaw.stream.interfaces.*;
 import pl.stanislaw.myarraylist.MyArrayList;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.*;
 
 public class MyStream<T> {
 
     private final MyList<T> elements;
+    private boolean parallel = false;
 
     public MyStream(MyList<T> elements) {
         this.elements = elements;
@@ -32,15 +36,46 @@ public class MyStream<T> {
 
     public <R> MyStream<R> map(MyFunction<T, R> mapper) {
         MyList<R> list = new MyArrayList<>();
-        for (T element : elements) {
-            list.add(mapper.apply(element));
+        if (parallel) {
+            ExecutorService executorService = Executors.newFixedThreadPool(5);
+            List<Callable<R>> tasks = new ArrayList<>();
+            for (T element : elements) {
+                Callable<R> callable = () -> mapper.apply(element);
+                tasks.add(callable);
+            }
+            try {
+                for (Future<R> future : executorService.invokeAll(tasks)) {
+                    list.add(future.get());
+                }
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+            executorService.shutdown();
+        } else {
+
+            for (T element : elements) {
+                list.add(mapper.apply(element));
+            }
+
         }
-        return new MyStream<>(list);
+        return new MyStream<R>(list);
+
     }
 
     public void forEach(MyConsumer<T> action) {
-        for (T element : elements) {
-            action.accept(element);
+        if (parallel) {
+            ExecutorService executorService = Executors.newFixedThreadPool(5);
+            for (T element : elements) {
+                Runnable runnable = () -> action.accept(element);
+                executorService.execute(runnable);
+            }
+            executorService.shutdown();
+        } else {
+            for (T element : elements) {
+                action.accept(element);
+            }
         }
     }
 
@@ -83,7 +118,7 @@ public class MyStream<T> {
     public MyStream<T> sorted(MyComparator<T> comparator) {
         MyList<T> list = elements;
         for (int i = 0; i < list.size(); i++) {
-            for (int j = 1; j < list.size() - i; j++) {//pętla wewnętrzna
+            for (int j = 1; j < list.size() - i; j++) {
                 if (comparator.compare(list.get(j - 1), list.get(j)) > 0) {
                     T element = list.get(j - 1);
                     list.set(j - 1, list.get(j));
@@ -183,5 +218,10 @@ public class MyStream<T> {
             word += element.toString() + delimiter;
         }
         return word.substring(0, word.length() - delimiter.length());
+    }
+
+    public MyStream<T> parallel() {
+        parallel = true;
+        return this;
     }
 }
