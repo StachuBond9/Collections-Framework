@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MergeSort<T> {
-    MyComparator<T> comparator;
-    List<T> elements;
+    private final MyComparator<T> comparator;
+    private final List<T> elements;
 
     public MergeSort(MyComparator<T> comparator, List<T> elements) {
         this.comparator = comparator;
@@ -15,7 +15,23 @@ public class MergeSort<T> {
     }
 
     public List<T> sort() {
-        return merge_sort(elements);
+        return mergeSort(elements);
+    }
+
+    private List<T> mergeSort(List<T> list) {
+        if (list.size() < 2) {
+            return list;
+        }
+        int size = list.size() / 2;
+        List<T> left = new ArrayList<>();
+        List<T> right = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            left.add(list.get(i));
+        }
+        for (int i = size; i < list.size(); i++) {
+            right.add(list.get(i));
+        }
+        return merge(mergeSort(left), mergeSort(right));
     }
 
     private List<T> merge(List<T> lst1, List<T> lst2) {
@@ -29,8 +45,7 @@ public class MergeSort<T> {
                     result.add(lst1.get(k));
                 }
                 return result;
-            }
-            else if (i >= lst1.size()) {
+            } else if (i >= lst1.size()) {
                 for (int k = j; k < lst2.size(); k++) {
                     result.add(lst2.get(k));
                 }
@@ -47,22 +62,6 @@ public class MergeSort<T> {
             }
         }
         return result;
-    }
-
-    private List<T> merge_sort(List<T> list) {
-        if (list.size() < 2) {
-            return list;
-        }
-        int size = list.size() / 2;
-        List<T> left = new ArrayList<>();
-        List<T> right = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            left.add(list.get(i));
-        }
-        for (int i = size; i < list.size(); i++) {
-            right.add(list.get(i));
-        }
-        return merge(merge_sort(left), merge_sort(right));
     }
 
 

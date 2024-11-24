@@ -5,8 +5,8 @@ import pl.stanislaw.stream.interfaces.MyComparator;
 import java.util.List;
 
 public class BobbleSort<T> {
-    MyComparator<T> comparator;
-    List<T> elements;
+    private final MyComparator<T> comparator;
+    private final List<T> elements;
 
     public BobbleSort(MyComparator<T> comparator, List<T> elements) {
         this.comparator = comparator;
